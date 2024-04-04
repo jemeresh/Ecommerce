@@ -32,6 +32,9 @@
     "ENABLE_SOCKETS": true
   },
   "rules": {
+    "no-sequences": "warn",
+    "default-param-last": 0,
+    "import/extensions" : "warn",
     "react/no-unstable-nested-components": [
       "warn",
       { "allowAsProps": true }
