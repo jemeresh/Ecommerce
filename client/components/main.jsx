@@ -21,9 +21,9 @@ const Main = () => {
     <Head title="Main" />
     <Header />
     <div className="flex flex-wrap h-full">
-      {productList.map((good) => {
-        return (<div key={good.id}>
-          <Product good={good}/>
+      {Object.entries(productList).map((good) => {
+        return (<div key={good[0]}>
+          <Product good={good[1]}/>
           </div>)
       })}
     </div>

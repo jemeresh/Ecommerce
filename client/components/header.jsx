@@ -40,9 +40,9 @@ const Header = () => {
         </div>
       </Link>
     <nav className="flex mx-5 py-2">
-          <button id="eur" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={Click}>EUR</button>
-          <button id="usd" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={Click}>USD</button>
-          <button id="cad" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={Click}>CAD</button>
+          <button id="eur" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={(e) => Click(e)}>EUR</button>
+          <button id="usd" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={(e) => Click(e)}>USD</button>
+          <button id="cad" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={(e) => Click(e)}>CAD</button>
     </nav>
     </nav>
     <nav className="flex justify-between border-green-700 pt-2 pb-3 m-h-screen">

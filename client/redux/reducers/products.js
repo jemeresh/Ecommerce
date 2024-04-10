@@ -1,6 +1,6 @@
 
 const initialState = {
-  goods: [],
+  goods: {},
   rates: {},
   currency: 'USD',
   sort: {
@@ -9,10 +9,10 @@ const initialState = {
   }
 }
 
-const GET_PRODUCTS = "GET_PRODUCTS"
-const GET_RATES = 'GET_RATES'
-const SET_CURRENCY = 'SET_CURRENCY'
-const SET_SORT = 'SET_SORT'
+const GET_PRODUCTS ='store/products/GET_PRODUCTS'
+const GET_RATES = 'store/products/GET_RATES'
+const SET_CURRENCY = 'store/products/SET_CURRENCY'
+const SET_SORT = 'store/products/SET_SORT'
 
 export function getSortList(sorttype = 'title', sortdirection = 'ab'){
   return(dispatch) => {
@@ -34,8 +34,11 @@ export function getProductsFromServer() {
   return (dispatch) => {
     fetch('/api/v1/goods')
    .then(response => response.json())
-   .then(result => {
-    dispatch({ type:GET_PRODUCTS, list:result })
+   .then((result) => {
+    const newObj = result.reduce((acc, product) => {
+      return {...acc, [product.id]:product }
+    }, {})
+    dispatch({ type: GET_PRODUCTS, list: newObj })
    })
   }
 }
