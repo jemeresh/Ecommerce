@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import { connectRouter } from 'connected-react-router'
 import auth from './auth'
 import products from "./products"
-import basket from './basket'
+import basket from "./basket"
 
 const createRootReducer = (history) =>
   combineReducers({

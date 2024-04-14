@@ -24,7 +24,7 @@ const Product = (props) => {
     <div className=".card bg-green-800 p-1 text-center items-center m-4 ">
       <div>
         <div key="key" className="bg-green-200 flex justify-center p-2">
-          <img alt="img" src={props.good.image} className=".card__image object-cover w-32 h-36"/>
+          <img alt={props.good.title} src={props.good.image} className=".card__image object-cover w-32 h-36"/>
         </div >
       </div >
       <div className="bg-green-200 p-3">
