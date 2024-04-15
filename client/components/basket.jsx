@@ -9,6 +9,9 @@ import BasketList from './basketList'
 const Basket = () => {
 
   const basketList = useSelector((s) => s.basket.basketProducts)
+  const calculate = useSelector((s) => s.basket.totalAmount)
+  const price = useSelector((s) => s.basket.totalPrice)
+
   return(
   <div>
     <Header />
@@ -20,8 +23,14 @@ const Basket = () => {
           {/* <BasketProducts itemId={itemId} amount={BasketList[itemId]}/> */}
           <BasketList item={{id: itemId, amount: basketList[itemId]}}/>
           </div>
+
         )
       })}
+      <div>
+        <div>Total amount:{calculate}</div>
+        <div>Total price:{price}</div>
+      </div>
+
     </div>
   </div>
   )
