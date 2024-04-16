@@ -6,9 +6,9 @@ const BasketList = ({ item }) => {
 
   const dispatch = useDispatch()
   const product = useSelector((s) => s.products.goods?.[item.id])
-  const currency = useSelector((store) => store.products.currency)
   const amount = useSelector((s) => s.basket.basketProducts?.[item.id])
   // const price = useSelectore((s) => s.basket.productsPrice)
+  const currency = useSelector((store) => store.products.currency)
   const rates = () => {
     if (currency === 'USD') {
       return 1

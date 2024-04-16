@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
 import  { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { history } from '../redux'
 
 import { changeCurrency, getSortList } from "../redux/reducers/products"
-import { totalPrice } from "../redux/reducers/basket"
+
 
 const Header = () => {
+
+  const total = useSelector((s) => s.basket.totalPrice)
+  const currency = useSelector((s) => s.products.currency)
+  const rates = () => {
+    if (currency === 'USD') {
+      return 1
+    }
+    if (currency === 'EUR') {
+      return 0.92694
+    }
+      return 1.3542
+  }
 
   const [tog, setTog] = useState({
     'price': true,
@@ -55,9 +67,10 @@ const Header = () => {
         </nav>
         <nav id="order-count" className="flex px-8">
       <div className="flex items-center ">
-        <div className="bg-indigo-200 mx-1">{totalPrice}</div>
+        <div className="bg-indigo-200 mx-1"/>
+        <div>{(total * rates()).toFixed(2)} {currency}</div>
         <button type="button" className=" hover:bg-green-600 font-semibold hover:text-white rounded-full px-6 border hover:border-green-800" onClick={()=>history.push(`/basket`)}>
-          Basket
+          Cart
         </button>
       </div>
         {/* <div>
