@@ -21,7 +21,7 @@ const BasketList = ({ item }) => {
   const price = (product.price * rates()).toFixed(2)
 
   return (
-    <div className=" flex flex-row space-x-4 m-1 place-items-start">
+    <div className=" flex space-x-16 m-1">
       <img alt="img" src={product.image} className=".product__image h-20 w-20"/>
       <div className=".product__tirle ">{product.title}</div>
       <div className=".product__price">{price} {currency}</div>
@@ -29,7 +29,7 @@ const BasketList = ({ item }) => {
       <div className=".product__remove border px-2">
       <button type="button" onClick={() => {dispatch(removeProduct(item.id))}} >remove</button>
       </div>
-      <div className=".products__price border">{price * amount} {currency}</div>
+      <div className=".products__price border">{(price * amount).toFixed(2)} {currency}</div>
     </div>
 
   )

@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import  { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { history } from '../redux'
 
-import { changeCurrency, getSortList } from "../redux/reducers/products"
+import CurrencyButton  from './currency-button'
 
 
 const Header = () => {
@@ -20,26 +20,6 @@ const Header = () => {
       return 1.3542
   }
 
-  const [tog, setTog] = useState({
-    'price': true,
-    'title' : true
-  }
-  )
-  const dispatch = useDispatch()
-  // const historyPush = () => {
-  //         history.push(`/basket`)
-  // }
-  const Click = (e) => {
-    dispatch(changeCurrency(e.target.textContent))
-  }
-
-  const sortIt = (type) => {
-    dispatch(getSortList(type, tog[type]? 'ab' : 'ba'))
-    setTog(
-      {...tog,
-         [type]: !tog[type]
-        })
-  }
 
 
  return (
@@ -52,37 +32,17 @@ const Header = () => {
           </nav>
         </div>
       </Link>
-    <nav className="flex mx-5 py-2">
-          <button id="eur" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={(e) => Click(e)}>EUR</button>
-          <button id="usd" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={(e) => Click(e)}>USD</button>
-          <button id="cad" className='p-2 mx-1 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800' type="button" onClick={(e) => Click(e)}>CAD</button>
+    </nav >
+    <nav className="flex justify-between">
+        <CurrencyButton/>
+        <nav className='flex px-20 '>
+          <nav>{(total * rates()).toFixed(2)} {currency}
+          <button type="button" className="hover:bg-green-600 font-semibold hover:text-white rounded-full border hover:border-green-800 px-6 my-8 mx-6" onClick={()=>history.push(`/basket`)}>Cart</button>
+          </nav>
+      </nav>
+     </nav>
     </nav>
-    </nav>
-    <nav className="flex justify-between border-green-700 pt-2 pb-3 m-h-screen">
-         <nav className="flex mx-5">
-             <button type="button" id="sort-price" className="flex bg-green-200 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800"
-              onClick={() => sortIt('price')}>Sort by price</button>
-             <button type="button" id="sort-title" className="flex bg-green-200 hover:bg-green-600 font-semibold hover:text-white px-2 rounded-full border hover:border-green-800"
-              onClick={() => sortIt('title')}>Sort by title</button>
-        </nav>
-        <nav id="order-count" className="flex px-8">
-      <div className="flex items-center ">
-        <div className="bg-indigo-200 mx-1"/>
-        <div>{(total * rates()).toFixed(2)} {currency}</div>
-        <button type="button" className=" hover:bg-green-600 font-semibold hover:text-white rounded-full px-6 border hover:border-green-800" onClick={()=>history.push(`/basket`)}>
-          Cart
-        </button>
-      </div>
-        {/* <div>
-        <button type="button" onClick={historyPush}>Basket</button>
-      </div> */}
-          {/* <Link to="/basket">
-            Basket
-            <div>2856,34р</div>
-          </Link> */}
-        </nav>
-    </nav>
-    </nav>
+
    )
  }
 

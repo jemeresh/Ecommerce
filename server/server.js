@@ -37,6 +37,7 @@ server.get('/api/v1/goods', async (rec, res) => {
   res.json(data)
 })
 
+
 server.get('/api/v1/goods/:type/:direction', async (req, res) => {
   const { type, direction } = req.params
   const data = await readFile(urlData, 'utf8')
@@ -66,7 +67,7 @@ server.get('/api/v1/goods/:type/:direction', async (req, res) => {
     //!     return (a.price - b.price)
     //! }
   })
-  const filtered = sorted.filter((item, index) => index <= 30)
+  const filtered = sorted.filter((it, index) => index <= 30)
   res.json(filtered)
 })
 
