@@ -28,11 +28,13 @@ const Basket = () => {
     <Header />
     <Head title="Basket" />
     <div className="flex flex-col items-center bg-green-200 h-screen p-2">
-      {Object.keys(basketList).filter((id) => typeof basketList[id] !== 'undefined').map((itemId) => {
+      {Object
+      .keys(basketList)
+      .filter((id) => typeof basketList[id] !== 'undefined')
+      .map((itemId) => {
         return (
         <div key={itemId}>
-          {/* <BasketProducts itemId={itemId} amount={BasketList[itemId]}/> */}
-          <BasketList item={{id: itemId, amount: basketList[itemId]}}/>
+          <BasketList item={{id: itemId, amount: basketList[itemId].amount }}/>
           </div>
 
         )

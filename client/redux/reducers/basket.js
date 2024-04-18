@@ -1,14 +1,18 @@
 const initialState = {
-  basketProducts: {},
+  basketProducts: {
+    // 'id' : 00000,
+    // 'title' : 'aaaa',
+    // 'amount': +
+  },
   totalAmount: 0,
   totalPrice: 0
 }
 const CHANGE_PRODUCTS = 'store/basket/CHANGE_PRODUCTS'
 
-function totalCalculate(basket, products) {
+function totalCalculate(basket) {
   const total = Object.entries(basket).reduce((acc, goodArr) => {
-    const amount = acc.amount + goodArr[1]
-    const price = (acc.price +  (products?.[goodArr[0]].price || 0) * (basket?.[goodArr[0]] || 0) ) // || {} для исправления ошибки no-unsafe-optional-chaining
+    const amount = acc.amount + goodArr[1].amount
+    const price = (acc.price +  (basket?.[goodArr[0]].price || 0) * (basket?.[goodArr[0]].amount || 0) ) // || {} для исправления ошибки no-unsafe-optional-chaining
       return { amount, price }
     },{
       amount: 0,
@@ -22,9 +26,9 @@ export function addToBasket(itemId) {
     const basket = getState().basket.basketProducts
     const products = getState().products.goods
     const updateBasket = typeof basket?.[itemId] === 'undefined'
-     ? {...basket,[itemId]: 1}
-     : {...basket, [itemId]: basket[itemId] + 1}
-     const total = totalCalculate(updateBasket, products)
+     ? {...basket,[itemId]: {...products[itemId], amount: 1}}
+     : {...basket, [itemId]: {...basket[itemId], amount: basket[itemId].amount + 1}}
+     const total = totalCalculate(updateBasket, basket)
     dispatch({
        type: CHANGE_PRODUCTS,
        changeGoods: updateBasket,
@@ -37,14 +41,16 @@ export function addToBasket(itemId) {
 export function removeProduct(itemId) {
   return (dispatch, getState) => {
     const basket = getState().basket.basketProducts
-    const products = getState().products.goods
-    const updateBasket = {...basket, [itemId]: basket[itemId] - 1}
-    if  (updateBasket[itemId] <= 0) {
+    const updateBasket = {
+      ...basket,
+       [itemId]: { ...basket[itemId],
+         amount: basket[itemId].amount- 1}}
+    if  (updateBasket[itemId].amount <= 0) {
         delete updateBasket[itemId]
     }
     // ? {...basket,[itemId]: undefineed}
     //  : {...basket, [itemId]: basket[itemId] - 1} )
-    const total= totalCalculate(updateBasket, products)
+    const total= totalCalculate(updateBasket)
     dispatch({
        type: CHANGE_PRODUCTS,
        changeGoods: updateBasket,

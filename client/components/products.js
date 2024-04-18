@@ -8,7 +8,7 @@ const Product = (props) => {
 
   const dispatch = useDispatch()
   const currency = useSelector((store) => store.products.currency)
-  const amount = useSelector((store) => store.basket?.basketProducts?.[props.good.id])
+  const amount = useSelector((store) => store.basket?.basketProducts?.[props.good.id]?.amount)
   //! const currentRate = useSelector((store) => store.products.rates)
 
   const rates = () => {
