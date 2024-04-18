@@ -28,7 +28,7 @@ const Basket = () => {
   <div>
     <Header />
     <Head title="Basket" />
-    <div className="flex flex-col items-center bg-green-200 h-screen p-2">
+    <div className="flex flex-col bg-green-200 w-full h-screen p-2">
       {Object
       .values(basketList)
       .filter((good) => typeof basketList[good.id] !== 'undefined')
@@ -46,15 +46,15 @@ const Basket = () => {
     })
       .map((item) => {
         return (
-        <div key={item.id}>
+        <div key={item.id} className="flex justify-around w-full  ">
           <BasketList item={{id: item.id, amount:item.amount }}/>
           </div>
 
         )
       })}
       <div>
-        <div>Total amount:{calculate}</div>
-        <div>Total price:{(price * rates()).toFixed(2)} {currency}</div>
+        <div className=" flex justify-center">Total amount:{calculate}</div>
+        <div className=" flex justify-center">Total price:{(price * rates()).toFixed(2)} {currency}</div>
       </div>
 
     </div>

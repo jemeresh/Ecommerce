@@ -19,7 +19,7 @@ const BasketList = ({ item }) => {
   const price = (product.price * rates()).toFixed(2)
 
   return (
-    <div className=" flex space-x-16 m-1">
+    <div className=" flex m-1 justify-between w-full">
       <img alt="img" src={product.image} className=".product__image h-20 w-20"/>
       <div className=".product__tirle ">{product.title}</div>
       <div className=".product__price">{price} {currency}</div>
