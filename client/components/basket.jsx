@@ -12,6 +12,7 @@ const Basket = () => {
   const calculate = useSelector((s) => s.basket.totalAmount)
   const price = useSelector((s) => s.basket.totalPrice)
   const currency = useSelector((store) => store.products.currency)
+  const { type, direction } = useSelector((store) => store.products.sort)
 
   const rates = () => {
     if (currency === 'USD') {
@@ -29,12 +30,24 @@ const Basket = () => {
     <Head title="Basket" />
     <div className="flex flex-col items-center bg-green-200 h-screen p-2">
       {Object
-      .keys(basketList)
-      .filter((id) => typeof basketList[id] !== 'undefined')
-      .map((itemId) => {
+      .values(basketList)
+      .filter((good) => typeof basketList[good.id] !== 'undefined')
+      .sort((a, b) => {
+    if (type === 'title' && direction === 'ab') {
+      return (a.title.localeCompare(b.title))
+    }
+    if (type === 'title' && direction === 'ba') {
+      return (b.title.localeCompare(a.title))
+    }
+    if (type === 'price' && direction === 'ab') {
+      return (a.price - b.price)
+    }
+      return (b.price - a.price)
+    })
+      .map((item) => {
         return (
-        <div key={itemId}>
-          <BasketList item={{id: itemId, amount: basketList[itemId].amount }}/>
+        <div key={item.id}>
+          <BasketList item={{id: item.id, amount:item.amount }}/>
           </div>
 
         )

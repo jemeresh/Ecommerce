@@ -31,6 +31,22 @@ export function getSortList(sorttype = 'title', sortdirection = 'ab'){
     sorttype,
     sortdirection
    })
+  //  const sortBasket = Object.value(basket).sort((a, b) => {
+  //   if (type === 'title' && direction === 'ab') {
+  //     return (a.title.localeCompare(b.title))
+  //   }
+  //   if (type === 'title' && direction === 'ba') {
+  //     return (b.title.localeCompare(a.title))
+  //   }
+  //   if (type === 'price' && direction === 'ab') {
+  //     return (a.price - b.price)
+  //   }
+  //     return (b.price - a.price)
+  //   })
+  //  dispatch({
+  //   type: SORT_BASKET,
+  //   sortBasket
+  //  })
   }
 }
 

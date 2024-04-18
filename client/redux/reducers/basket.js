@@ -8,6 +8,7 @@ const initialState = {
   totalPrice: 0
 }
 const CHANGE_PRODUCTS = 'store/basket/CHANGE_PRODUCTS'
+export const SORT_BASKET = 'store/basket/SORT_BASKET' // export для того чтобы это иожно было опрокинуть в другой reducer
 
 function totalCalculate(basket) {
   const total = Object.entries(basket).reduce((acc, goodArr) => {
@@ -68,6 +69,12 @@ export default (state = initialState, action) => {
         basketProducts: action.changeGoods,
         totalAmount: action.totalAmount,
         totalPrice: action.totalPrice
+      }
+    }
+    case SORT_BASKET:  {
+      return {
+        ...state,
+        basketProducts: action.sortBasket,
       }
     }
     default:

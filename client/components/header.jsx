@@ -3,7 +3,7 @@ import  { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { history } from '../redux'
 
-import CurrencyButton  from './currency-button'
+import CurrencyButton  from './currencyandsort'
 
 
 const Header = () => {
