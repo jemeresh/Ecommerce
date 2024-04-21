@@ -1,3 +1,9 @@
+import {LOGS_CHANGE_CURRENCY} from '../middleware/logs'
+
+const GET_PRODUCTS ='store/products/GET_PRODUCTS'
+const GET_RATES = 'store/products/GET_RATES'
+const SET_CURRENCY = 'store/products/SET_CURRENCY'
+const SET_SORT = 'store/products/SET_SORT'
 
 const initialState = {
   goods: {},
@@ -13,10 +19,6 @@ const ArrToObject = (arr) => {
   return arr.reduce((acc, product) => ({...acc, [product.id]:product }), {})
 }
 
-const GET_PRODUCTS ='store/products/GET_PRODUCTS'
-const GET_RATES = 'store/products/GET_RATES'
-const SET_CURRENCY = 'store/products/SET_CURRENCY'
-const SET_SORT = 'store/products/SET_SORT'
 
 export function getSortList(sorttype = 'title', sortdirection = 'ab'){
   return(dispatch) => {
@@ -72,8 +74,21 @@ export function getRatesFromServer() {
   }
 }
 
+// export function changeCurrency(currencyName) {
+//   return { type:SET_CURRENCY, currencyName }
+// }
 export function changeCurrency(currencyName) {
-  return { type:SET_CURRENCY, currencyName }
+  return (dispatch, getState) => {
+    const lastcurrency = getState().products.currency
+    dispatch({ type:SET_CURRENCY, currencyName })
+    dispatch({
+      type: LOGS_CHANGE_CURRENCY,
+      payload: {
+        lastcurrency,
+        newCurrency: currencyName
+      }
+    })
+  }
 }
 
 export function sortBytitle(list) {

@@ -8,7 +8,7 @@ import config from './config'
 import Html from '../client/html'
 //  import { data } from 'autoprefixer'
 
-const { readFile } = require('fs').promises
+const { readFile, writeFile } = require('fs').promises
 
 require('colors')
 
@@ -69,6 +69,19 @@ server.get('/api/v1/goods/:type/:direction', async (req, res) => {
   })
   const filtered = sorted.filter((it, index) => index <= 30)
   res.json(filtered)
+})
+
+server.post('/api/v1/logs', async(res, req) => {
+  const logStr = req.body.text
+  await readFile(`${__dirname}/data/logs.json`, 'utf8')
+  .then((arrWithLogs) => {
+    const logs = JSON.parse(arrWithLogs)
+    writeFile(`${__dirname}/data/logs.json`, JSON.stringify([...logs, logStr]), 'utf8')
+  })
+  .catch(() => {
+    writeFile(`${__dirname}/data/logs.json`, JSON.stringify([logStr]), 'utf8')
+  })
+  res.json({ status: "Log updated"})
 })
 
 server.get('/api/v1/rates' , async(rec, res) => {
