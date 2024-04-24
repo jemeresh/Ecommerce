@@ -12,17 +12,8 @@ const Basket = () => {
   const calculate = useSelector((s) => s.basket.totalAmount)
   const price = useSelector((s) => s.basket.totalPrice)
   const currency = useSelector((store) => store.products.currency)
+  const rates = useSelector((store) => store.products.rates)
   const { type, direction } = useSelector((store) => store.products.sort)
-
-  const rates = () => {
-    if (currency === 'USD') {
-      return 1
-    }
-    if (currency === 'EUR') {
-      return 0.92694
-    }
-      return 1.3542
-  }
 
   return(
   <div>
@@ -54,7 +45,7 @@ const Basket = () => {
       })}
       <div>
         <div className=" flex justify-center">Total amount:{calculate}</div>
-        <div className=" flex justify-center">Total price:{(price * rates()).toFixed(2)} {currency}</div>
+        <div className=" flex justify-center">Total price:{(price * rates[currency]).toFixed(2)} {currency}</div>
       </div>
 
     </div>

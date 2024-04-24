@@ -3,10 +3,10 @@ import path from 'path'
 import cors from 'cors'
 import sockjs from 'sockjs'
 import cookieParser from 'cookie-parser'
+import axios from 'axios'
 
 import config from './config'
 import Html from '../client/html'
-//  import { data } from 'autoprefixer'
 
 const { readFile, writeFile } = require('fs').promises
 
@@ -30,6 +30,50 @@ middleware.forEach((it) => server.use(it))
 
 const urlData =`${__dirname}/data/data.json`
 const ratesUrl = `${__dirname}/data/rates.json`
+const urlLogs = `${__dirname}/data/logs.json`
+
+server.post('/api/v1/logs', async(req, res) => {
+  const logStr = req.body.text
+  try {
+    const arrOfLogs = await readFile(urlLogs, 'utf8')
+    const logs = JSON.parse(arrOfLogs)
+    if (logs.length >= 20) {
+      logs.shift()  // ! почему то не работает slice(10)
+    }
+    writeFile(urlLogs, JSON.stringify([...logs, logStr]),'utf8')
+    } catch {
+     writeFile(urlLogs, JSON.stringify([logStr]), 'utf8')
+  }
+    res.json({ status: "Log updated"})
+  })
+
+
+// server.post('/api/v1/logs', async(res, req) => {
+//   const logStr = req.body.text()
+//   console.log(logStr)
+//   await readFile(urlLogs, 'utf8')
+//   .then((arrWithLogs) => {
+//     const logs = JSON.parse(arrWithLogs)
+//     writeFile(urlLogs, JSON.stringify([...logs, logStr]), 'utf8')
+//   })
+//   .catch(() => {
+//     writeFile(urlLogs, JSON.stringify([logStr]), 'utf8')
+//   })
+//   res.json({ status: "Log updated"})
+// })
+
+ server.get('/api/v1/rates', async (req, res) => {
+     const rates = await axios.get('http://api.exchangerate.hhost/latest?base-USD&symbols-USD,EUR,CAD')
+     .then(({ data }) => {
+       writeFile(ratesUrl, JSON.stringify(data.rates), 'utf8')
+       return data.rates
+     })
+     .catch (async () => {
+     const lastRates = await readFile(ratesUrl, 'utf8')
+     return JSON.parse(lastRates)
+     })
+   res.json(rates)
+ })
 
 server.get('/api/v1/goods', async (rec, res) => {
   const result = await readFile(urlData, 'utf8').then((text) => JSON.parse(text))
@@ -71,23 +115,10 @@ server.get('/api/v1/goods/:type/:direction', async (req, res) => {
   res.json(filtered)
 })
 
-server.post('/api/v1/logs', async(res, req) => {
-  const logStr = req.body.text
-  await readFile(`${__dirname}/data/logs.json`, 'utf8')
-  .then((arrWithLogs) => {
-    const logs = JSON.parse(arrWithLogs)
-    writeFile(`${__dirname}/data/logs.json`, JSON.stringify([...logs, logStr]), 'utf8')
-  })
-  .catch(() => {
-    writeFile(`${__dirname}/data/logs.json`, JSON.stringify([logStr]), 'utf8')
-  })
-  res.json({ status: "Log updated"})
-})
-
-server.get('/api/v1/rates' , async(rec, res) => {
-  const rate = await readFile(ratesUrl, 'utf8').then(({data}) => data.rates)
-  res.json(rate)
-})
+// server.get('/api/v1/rates' , async(rec, res) => {
+//   const rate = await readFile(ratesUrl, 'utf8').then(({data}) => data.rates)
+//   res.json(rate)
+// })
 
 // server.get('/', (req, res) => {
 //   res.send(`

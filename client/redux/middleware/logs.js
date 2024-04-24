@@ -16,12 +16,12 @@ const  logs = () => {
               headers: {
                 'Content-Type' : 'application/json'
               },
-              body: {
+              body: JSON.stringify({
                 text: `change currency from ${action.payload.lastcurrency} to ${action.payload.newCurrency}`
-              }
+              })
             })
               .then((res) => {
-                res.json()
+                return res.json()
               })
               .then((result) => {
                 console.log(result)

@@ -7,16 +7,8 @@ const BasketList = ({ item }) => {
   const dispatch = useDispatch()
   const product = useSelector((s) => s.basket.basketProducts?.[item.id])
   const currency = useSelector((store) => store.products.currency)
-  const rates = () => {
-    if (currency === 'USD') {
-      return 1
-    }
-    if (currency === 'EUR') {
-      return 0.92694
-    }
-      return 1.3542
-  }
-  const price = (product.price * rates()).toFixed(2)
+  const rates = useSelector((s) => s.products.rates)
+  const price = (product.price * rates[currency]).toFixed(2)
 
   return (
     <div className=" flex m-1 justify-between w-full">
