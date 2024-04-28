@@ -1,4 +1,4 @@
-import {LOGS_CHANGE_CURRENCY} from '../middleware/logs'
+import {LOGS_CHANGE_CURRENCY } from '../middleware/logs'
 
 const GET_PRODUCTS ='store/products/GET_PRODUCTS'
 const GET_RATES = 'store/products/GET_RATES'

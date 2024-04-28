@@ -1,3 +1,5 @@
+import { LOGS_ADD_ITEM }from '../middleware/logs'
+
 const initialState = {
   basketProducts: {
     // 'id' : 00000,
@@ -35,6 +37,12 @@ export function addToBasket(itemId) {
        changeGoods: updateBasket,
        totalAmount: total.amount,
        totalPrice: total.price  })
+       dispatch({
+        type: LOGS_ADD_ITEM,
+        payload: {
+          itemTitle: updateBasket[itemId].title
+        }
+       })
   }
 }
 
