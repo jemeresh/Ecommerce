@@ -1,4 +1,4 @@
-import {LOGS_CHANGE_CURRENCY } from '../middleware/logs'
+import {LOGS_CHANGE_CURRENCY, LOGS_SORT_TITLE } from '../middleware/logs'
 
 const GET_PRODUCTS ='store/products/GET_PRODUCTS'
 const GET_RATES = 'store/products/GET_RATES'
@@ -32,6 +32,13 @@ export function getSortList(sorttype = 'title', sortdirection = 'ab'){
     type: SET_SORT,
     sorttype,
     sortdirection
+   })
+   dispatch({
+    type: LOGS_SORT_TITLE,
+    payload: {
+      title: sorttype,
+      direction: sortdirection
+    }
    })
   //  const sortBasket = Object.value(basket).sort((a, b) => {
   //   if (type === 'title' && direction === 'ab') {
