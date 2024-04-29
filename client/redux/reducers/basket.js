@@ -1,4 +1,4 @@
-import { LOGS_ADD_ITEM }from '../middleware/logs'
+import { LOGS_ADD_ITEM, LOGS_REMOVE_ITEM }from '../middleware/logs'
 
 const initialState = {
   basketProducts: {
@@ -55,10 +55,14 @@ export function removeProduct(itemId) {
        [itemId]: { ...basket[itemId],
          amount: basket[itemId].amount- 1}}
     if  (updateBasket[itemId].amount <= 0) {
-        delete updateBasket[itemId]
+        dispatch({
+        type: LOGS_REMOVE_ITEM,
+        payload: {
+          itemTitle: updateBasket[itemId].title
+        }
+       })
+       delete updateBasket[itemId]
     }
-    // ? {...basket,[itemId]: undefineed}
-    //  : {...basket, [itemId]: basket[itemId] - 1} )
     const total= totalCalculate(updateBasket)
     dispatch({
        type: CHANGE_PRODUCTS,

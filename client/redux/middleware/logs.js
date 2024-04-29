@@ -1,10 +1,8 @@
 export const LOGS_CHANGE_CURRENCY = 'middleware/logs/LOGS_CHANGE_CURRENCY'
 export const LOGS_ADD_ITEM = 'middleware/logs/LOGS_ADD_ITEM'
+export const LOGS_REMOVE_ITEM = 'middleware/logs/LOGS_REMOVE_ITEM'
+export const LOGS_LOCATION_CHANGE = '@@router/LOCATION_CHANGE'
 /*
-change currency from ${currency} to ${currency2}
-add ${item-title} to the backet
-remove ${item-title} from the basket
-navigate to ${url} page
 sort by ${title}
 time of action in utc forma (+newData())
 */
@@ -40,10 +38,19 @@ const  logs = () => {
             toServer(`add ${action.payload.itemTitle} to the backet`)
             break
           }
+          case LOGS_REMOVE_ITEM : {
+            toServer(`remove ${action.payload.itemTitle} from the basket`)
+            break
+          }
+          case LOGS_LOCATION_CHANGE: {
+            toServer(`navigate to ${action.payload.location.pathname} page`)
+            break
+          }
           default:
             return next(action)
         }
         return next(action)
       }
     }
+
 export default logs()
