@@ -47,9 +47,11 @@ server.post('/api/v1/logs', async(req, res) => {
     res.json({ status: "Log updated"})
   })
 
+
   server.get('/api/v1/logs', async(req, res) => {
-    const Logs = await readFile(urlLogs, 'utf8')
-    res.json(Logs)
+    const arrOfLogs = await readFile(urlLogs, 'utf8')
+    const logs = JSON.parse(arrOfLogs)
+    res.json(logs)
   })
 
 

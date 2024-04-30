@@ -1,16 +1,1 @@
-[
-  "navigate to /basket page at 2024-04-29T08:37:55.218Z",
-  "navigate to /main page at 2024-04-29T08:37:57.174Z",
-  "change currency from USD to EUR at 2024-04-29T08:38:00.253Z",
-  "change currency from EUR to USD at 2024-04-29T08:38:01.059Z",
-  "add Beer - Labatt Blue to the backet at 2024-04-29T08:38:02.209Z",
-  "add Beer - Labatt Blue to the backet at 2024-04-29T08:38:02.438Z",
-  "add Beans - Fine to the backet at 2024-04-29T08:38:03.503Z",
-  "navigate to /basket page at 2024-04-29T08:38:04.795Z",
-  "remove Beans - Fine from the basket at 2024-04-29T08:38:06.490Z",
-  "navigate to /main page at 2024-04-29T08:38:07.891Z",
-  "sort by price and ab at 2024-04-29T08:38:09.451Z",
-  "sort by price and ba at 2024-04-29T08:38:10.149Z",
-  "sort by title and ab at 2024-04-29T08:38:11.570Z",
-  "sort by title and ba at 2024-04-29T08:38:12.297Z"
-]
+["navigate to /basket page at 2024-04-29T08:37:55.218Z","navigate to /main page at 2024-04-29T08:37:57.174Z","change currency from USD to EUR at 2024-04-29T08:38:00.253Z","change currency from EUR to USD at 2024-04-29T08:38:01.059Z","add Beer - Labatt Blue to the backet at 2024-04-29T08:38:02.209Z","add Beer - Labatt Blue to the backet at 2024-04-29T08:38:02.438Z","add Beans - Fine to the backet at 2024-04-29T08:38:03.503Z","navigate to /basket page at 2024-04-29T08:38:04.795Z","remove Beans - Fine from the basket at 2024-04-29T08:38:06.490Z","navigate to /main page at 2024-04-29T08:38:07.891Z","sort by price and ab at 2024-04-29T08:38:09.451Z","sort by price and ba at 2024-04-29T08:38:10.149Z","sort by title and ab at 2024-04-29T08:38:11.570Z","sort by title and ba at 2024-04-29T08:38:12.297Z","navigate to /main page at 2024-04-30T19:47:15.930Z","navigate to /main page at 2024-04-30T19:48:32.493Z","navigate to /main page at 2024-04-30T19:57:09.952Z","navigate to /main page at 2024-04-30T20:10:18.303Z","navigate to /main page at 2024-04-30T20:11:36.333Z"]

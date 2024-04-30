@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { history } from '../redux'
 
 import CurrencyButton  from './currencyandsort'
+import LogButton from './log_button'
 
 
 const Header = () => {
@@ -29,6 +30,7 @@ const Header = () => {
           <nav>{(total * rates[currency]).toFixed(2)} {currency}
           <button type="button" className="hover:bg-green-600 font-semibold hover:text-white rounded-full border hover:border-green-800 px-6 my-8 mx-6" onClick={()=>history.push(`/basket`)}>Cart</button>
           </nav>
+          <LogButton/>
       </nav>
      </nav>
     </nav>
