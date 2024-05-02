@@ -49,10 +49,14 @@ server.post('/api/v1/logs', async(req, res) => {
 
 
   server.get('/api/v1/logs', async(req, res) => {
-    const arrOfLogs = await readFile(urlLogs, 'utf8')
-    const logs = JSON.parse(arrOfLogs)
+    const logs = await readFile(urlLogs, 'utf8')
+    .then((arr) => {
+      return JSON.parse(arr)
+    })
+    .catch((err)  => err)
     res.json(logs)
   })
+
 
 
 // server.post('/api/v1/logs', async(res, req) => {

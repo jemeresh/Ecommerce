@@ -1,24 +1,38 @@
-import React, {  useEffect } from 'react'
-import {  useDispatch, useSelector } from 'react-redux'
+import React, {useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import Header from './header'
+import Head from './head'
+
 import { getLogsFromServer } from '../redux/reducers/logs.js'
 
 
-const logList = () => {
+const LogList = () => {
 
   const dispatch = useDispatch()
-  const logs = useSelector((s) => s.logs.data)
+  const logsFile = useSelector((store) => store.logs.logs)
 
-  useEffect(() =>{
+  useEffect(() => {
     dispatch(getLogsFromServer())
-  },[])
+    return () => {} // для того чтобы избежать лишних рендеров didAnmout?
+  }, [])
 
   return (
-    <div className=" flex m-1 justify-between w-full">
-      <div className=".logs">{logs}</div>
+    <div>
+      <Head title ="Logs"/>
+      <Header />
+        <div className="flex flex-col h-full">
+          {logsFile.map((string, index) => {
+            return (
+            <div key={`log-${index}`}>
+              {string} fff
+            </div>)
+          })}
+         </div>
     </div>
   )
 }
 
-logList.propTypes = {}
+LogList.propTypes = {}
 
-export default React.memo(logList)
+export default React.memo(LogList)

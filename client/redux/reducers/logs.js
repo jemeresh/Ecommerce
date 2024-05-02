@@ -2,13 +2,13 @@
 const LOGS_REDUCER = 'LOGS_REDUCER'
 
 const initialState = {
-  data : []
+  logs: []
 }
 
 export function getLogsFromServer () {
   return(dispatch) => {
     fetch('/api/v1/logs')
-    .then(res => res.json)
+    .then((res) => res.json())
     .then((logs) => {
       dispatch({type:LOGS_REDUCER, logs })
     })
@@ -20,7 +20,7 @@ export default (state = initialState, action) =>{
     case LOGS_REDUCER : {
       return {
         ...state,
-        data: action.logs
+       logs: action.logs.reverse()
       }
     }
     default:
