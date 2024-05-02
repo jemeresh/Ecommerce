@@ -25,7 +25,7 @@ const LogList = () => {
           {logsFile.map((string, index) => {
             return (
             <div key={`log-${index}`}>
-              {string} fff
+              {string}
             </div>)
           })}
          </div>
